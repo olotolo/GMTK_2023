@@ -1,0 +1,32 @@
+Reverse the roles
+
+you control alot of enemys that has to kill (or smth) the "player" that is usualy played
+
+Binding of isac like game, where an algorithm plays the player but you control the room
+
+
+
+
+
+
+Flappy bird, but you control the rods (Rods alot smaller (bigger holes) and you can only change them so far) (Bird Flappy / Flappy Tubes)
+The Algorithm controls the bird, but the player has to adjust the rods, that the bird does NOT crash. Get as far as possible
+
+Player has Resouce that he can use to decrease the size of a rod. He earns the resource over time, or by making another rod larger
+
+The Game speeds up over time
+
+Events that make the bird go up / down / faster / slower / .... room for more ideas
+Powerups that can be collected by the Player (Powerup Power: Remove Tube, Slow game down, 
+
+
+
+
+
+Possible Fixes later on:
+insivible trigger collider under bird, that makes it jump.
+
+When generating Tubes first Instanciate the first one with random numbers and instantiate the second one based on the first ones random values.
+(So the gap is always decent enough)
+
+ToDo: Smooth the tube positioning

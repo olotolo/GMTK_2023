@@ -21,8 +21,8 @@ public class TubeController : MonoBehaviour
     //Instanciate Tubes
     public void CreateNewTubes()
     {
-        GameObject clickObject = Instantiate(_clickObject);
-        clickObject.transform.SetParent(transform, false);
+        GameObject clickObject = Instantiate(_clickObject, transform.position, Quaternion.identity);
+        //clickObject.transform.SetParent(transform, false);
 
 
         if (active)

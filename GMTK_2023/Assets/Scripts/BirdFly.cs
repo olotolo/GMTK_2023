@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -79,10 +77,10 @@ public class BirdFly : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Tube")
+        if (collision.tag == "TubeTop" || collision.tag == "TubeBot")
         {
             _gameOverScoreDisplay.GetComponent<TextMeshProUGUI>().text = "Score: " + _score.ToString();
-
+            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             HeightToJump = -100;
             StartCoroutine(GameOver());
         }

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TubeController : MonoBehaviour
@@ -10,6 +11,7 @@ public class TubeController : MonoBehaviour
     [SerializeField] public List<GameObject> PowerUp;
     public GameObject CurrentBoost;
 
+    [SerializeField]
     private bool _slow = false;
     public bool Slow
     {
@@ -20,6 +22,7 @@ public class TubeController : MonoBehaviour
             if(_slow) { Fast = false; }
         }
     }
+    [SerializeField]
     private bool _fast = false;
     public bool Fast
     {

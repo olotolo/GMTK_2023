@@ -281,7 +281,10 @@ MonoBehaviour:
   PowerUp:
   - {fileID: 4863911863840800533, guid: 6924258e78f3a3c4eaa8cfbca71d64e0, type: 3}
   - {fileID: 5717376313140705818, guid: 04bf1df096730c942a7183c4126f74b0, type: 3}
+  - {fileID: 7229669177107074784, guid: 1fb19178a1d344b4b9789a8eeddb854d, type: 3}
   CurrentBoost: {fileID: 0}
+  _slow: 0
+  _fast: 0
   _speed: 3
   TimeBetweenTubes: 2.5
 --- !u!1 &17969803
@@ -2034,8 +2037,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281306147
+  m_fontColor: {r: 0.13679245, g: 0.5471698, b: 0.18457241, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

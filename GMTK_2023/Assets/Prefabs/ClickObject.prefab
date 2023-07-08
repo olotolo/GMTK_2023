@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8623282503572260896}
   m_Layer: 0
   m_Name: TubeBot
-  m_TagString: Tube
+  m_TagString: TubeBot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 3288850517007620532}
   m_Layer: 0
   m_Name: TubeTop
-  m_TagString: Tube
+  m_TagString: TubeTop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

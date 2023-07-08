@@ -32,7 +32,7 @@ public class InvisibleClickObject : MonoBehaviour
 
         if(Played.Events)
         {
-            int eventChance = UnityEngine.Random.Range(1, 1);
+            int eventChance = UnityEngine.Random.Range(1, 2);
             if (eventChance == 1)
             {
                 _event = true;

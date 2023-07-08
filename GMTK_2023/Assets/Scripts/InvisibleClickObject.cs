@@ -27,19 +27,15 @@ public class InvisibleClickObject : MonoBehaviour
         TubeTop.transform.position = new Vector3(TubeTop.transform.position.x, _tubeTopY, 0);
         TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (20 - _tubeTopY), 0);
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime)
-    {
-        float startTime = Time.time;
-        while (Time.time < startTime + overTime)
+        int powerUpChance = UnityEngine.Random.Range(1, 4);
+        if(powerUpChance == 1)
         {
-            transform.position = Vector3.Lerp(source, new Vector3(transform.position.x, target.y, transform.position.z), (Time.time - startTime) / overTime);
-            yield return null;
+            int rnd = UnityEngine.Random.Range(0, FindFirstObjectByType<TubeController>().PowerUp.Count);
+            GameObject _powerUp = Instantiate(FindFirstObjectByType<TubeController>().PowerUp[rnd]);
+            _powerUp.transform.position = new Vector3(transform.position.x, _tubeTopY - 11.5f, 0);
+            _powerUp.transform.SetParent(gameObject.transform);
         }
-        transform.position = new Vector3(transform.position.x, target.y, transform.position.z);
     }
-
 
     private void Update()
     {

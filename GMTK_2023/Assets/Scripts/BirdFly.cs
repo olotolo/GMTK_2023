@@ -87,6 +87,10 @@ public class BirdFly : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if(collision.tag != "Tubes")
+        {
+            return;
+        }
         if (_gameOver == false)
         {
             Score++;

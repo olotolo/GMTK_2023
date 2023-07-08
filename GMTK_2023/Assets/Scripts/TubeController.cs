@@ -1,12 +1,49 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TubeController : MonoBehaviour
 {
     [SerializeField] GameObject _tube;
     [SerializeField] GameObject _clickObject;
+    [SerializeField] public List<GameObject> PowerUp;
 
-    public float Speed = 1.0f;
+    public bool Slow = false;
+    public bool Fast = false;
+
+    private float _speed = 3;
+
+    public float Speed
+    {
+        get
+        {
+            if(Slow == true)
+            {
+                return _speed / 1.5f;
+            }
+            if(Fast == true)
+            {
+                return _speed / 1.5f;
+            }
+            return _speed;
+        }
+        set
+        {
+            if(Slow == true)
+            {
+                _speed = value * 1.5f;
+                return;
+            }
+            if(Fast == true)
+            {
+                _speed = value * 1.5f;
+                return;
+            }
+            _speed = value;
+        }
+    }
+
     public float TimeBetweenTubes = 3f;
     bool active = true;
     private int _tubesCreated;

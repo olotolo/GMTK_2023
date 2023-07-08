@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
+
 public class BirdFly : MonoBehaviour
 {
     [SerializeField] private int _forceUp = 200;
     public float HeightToJump = -0.5f;
     private bool jumped = false;
-    private int _score = 0;
+    private int _score = 0, _difficultyCount = 0;
+
     public int Score
     {
         get => _score;
@@ -20,13 +22,33 @@ public class BirdFly : MonoBehaviour
             {
                 _scoreDisplay.GetComponent<TextMeshProUGUI>().text = _score.ToString();
             }
+            _difficultyCount++;
+            if(_difficultyCount % 3 == 0)
+            {
+                IncreaseSpeed();
+            }
         }
     }
 
-    private bool _gameOver = false;
+    public bool _gameOver { get; set; }
+
+    private void Awake()
+    {
+        _gameOver = true;
+    }
+
+    private TubeController _tubeController;
     [SerializeField] GameObject _scoreDisplay;
     [SerializeField] GameObject _gameOverScoreDisplay;
     [SerializeField] GameObject _gameOverDisplay;
+    [SerializeField] GameObject _jumpDisplay;
+
+    private void Start()
+    {
+        _tubeController = FindAnyObjectByType<TubeController>();
+        ChangeJumpDisplay();
+    }
+
     public void Fly()
     {
         var rb = GetComponent<Rigidbody2D>();
@@ -79,4 +101,27 @@ public class BirdFly : MonoBehaviour
         _gameOverDisplay.SetActive(true);
         Debug.Log("Game Over!");
     }
+
+    public void IncreaseSpeed()
+    {
+        _tubeController.Speed += 0.1f;
+        if(_tubeController.TimeBetweenTubes > 1.501)
+        {
+            _tubeController.TimeBetweenTubes -= 0.1f;
+        }
+
+        ChangeBirdPosition(UnityEngine.Random.Range(HeightToJump - 1.5f, HeightToJump + 1.5f));
+        ChangeJumpDisplay();
+    }
+
+    public void ChangeBirdPosition(float heightToJump)
+    {
+        HeightToJump = heightToJump;
+    }
+
+    private void ChangeJumpDisplay()
+    {
+        _jumpDisplay.transform.position = new Vector3(_jumpDisplay.transform.position.x, HeightToJump - 0.6f, _jumpDisplay.transform.position.z);
+    }
+
 }

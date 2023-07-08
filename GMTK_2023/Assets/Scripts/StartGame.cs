@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class StartGame : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject _startMenu;
+    [SerializeField] GameObject _platform;
+    [SerializeField] GameObject _displayPlatformToggle;
     bool started = false;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         Destroy(_startMenu);
         Time.timeScale = 1f;
+        _platform.SetActive(_displayPlatformToggle.GetComponent<Toggle>().isOn);
+        FindFirstObjectByType<BirdFly>()._gameOver = false;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         if(Played.played == false)
@@ -25,12 +27,13 @@ public class StartGame : MonoBehaviour, IPointerClickHandler
         {
             Destroy(_startMenu);
             Time.timeScale = 1f;
+            FindFirstObjectByType<BirdFly>()._gameOver = false;
+
         }
+
+
     }
     
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }

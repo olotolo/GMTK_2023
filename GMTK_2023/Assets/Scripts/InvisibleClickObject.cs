@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
+public class InvisibleClickObject : MonoBehaviour
 {
     public GameObject TubeTop { get; set; }
     public GameObject TubeBot { get; set; }
@@ -11,6 +10,7 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
 
     private Rigidbody2D rb;
     private float _y;
+    private bool _isMoving = false;
 
     private void Awake()
     {
@@ -19,35 +19,14 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
         TubeTop = transform.GetChild(1).gameObject;
     }
 
-    //Tube Top: Y Value Range 10 - 0 (10-3)
-    //Tube Bottom: Y Value Range -10 - 0 (-10 - -3)
+    //Tube Top: Y Value Range 10 - 0
+    //Tube Bottom: Y Value Range 0 - -10
     private void Start()
     {
-        int _tubeTopX = UnityEngine.Random.Range(3, 10);
+        int _tubeTopX = UnityEngine.Random.Range(1, 10);
         TubeTop.transform.position = new Vector3(TubeTop.transform.position.x, _tubeTopX, 0);
         TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (11 - _tubeTopX), 0);
         rb = GetComponent<Rigidbody2D>();
-    }
-    public void OnPointerClick(PointerEventData eventData)
-    {
-         //Leftclick Higher, Rightclick Lower
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            if(!TubeBot.GetComponent<MoveTube>().ReachedMax)
-            {
-                _y = transform.position.y;
-                GetComponent<Rigidbody2D>().AddForce(transform.up * 50);
-            }
-            
-        } 
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            if(!TubeTop.GetComponent<MoveTube>().ReachedMax)
-            {
-                _y = transform.position.y;
-                GetComponent<Rigidbody2D>().AddForce(transform.up * -50);
-            }
-        }
     }
 
     IEnumerator MoveObject(Vector3 source, Vector3 target, float overTime)
@@ -64,6 +43,39 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            if(!_isMoving)
+            {
+                if (!TubeBot.GetComponent<MoveTube>().ReachedMax)
+                {
+                    if(!FindFirstObjectByType<BirdFly>()._gameOver)
+                    {
+                        _y = transform.position.y;
+                        GetComponent<Rigidbody2D>().AddForce(transform.up * 50);
+                        _isMoving = true;
+                        FindFirstObjectByType<AudioController>().Play("Tube_1");
+                    }
+                }
+            }
+            
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            if (!_isMoving) {
+                if (!TubeTop.GetComponent<MoveTube>().ReachedMax)
+                {
+                    if (!FindFirstObjectByType<BirdFly>()._gameOver)
+                    {
+                        _y = transform.position.y;
+                        GetComponent<Rigidbody2D>().AddForce(transform.up * -50);
+                        _isMoving = true;
+                        FindFirstObjectByType<AudioController>().Play("Tube_1");
+                    }
+                }
+            }
+        }
+        
         //Destroyed Tubes when they are too far to the left of the screen
         if (transform.position.x < -30)
         {
@@ -72,14 +84,20 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
         
         //Moves the tube
         transform.position += Vector3.left* Time.deltaTime * TubeController.Speed;
-        if (transform.position.y >= _y + 1 || transform.position.y <= _y - 1)
+
+        //If the position is reached
+        if (transform.position.y >= _y + 1 || transform.position.y <= _y -1)
         {
+            
             rb.velocity = Vector3.zero;
             rb.angularVelocity = 0;
             transform.position = new Vector3(transform.position.x, Convert.ToInt32(transform.position.y), transform.position.z);
-            Debug.Log(_y - transform.position.y);
+            _isMoving = false;
             return;
         }
+
+        
     }
+
 
 }

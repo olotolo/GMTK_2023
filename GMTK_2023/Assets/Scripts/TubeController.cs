@@ -7,7 +7,7 @@ public class TubeController : MonoBehaviour
     [SerializeField] GameObject _clickObject;
 
     public float Speed = 1.0f;
-    public int TimeBetweenTubes = 3000;
+    public float TimeBetweenTubes = 3f;
     bool active = true;
 
 
@@ -16,14 +16,11 @@ public class TubeController : MonoBehaviour
         CreateNewTubes();
     }
 
-
-
     //Instanciate Tubes
     public void CreateNewTubes()
     {
         GameObject clickObject = Instantiate(_clickObject, new Vector3(0,0,0), Quaternion.identity);
         clickObject.transform.SetParent(transform, false);
-
 
         if (active)
         {
@@ -40,7 +37,7 @@ public class TubeController : MonoBehaviour
     {
         if(active)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(TimeBetweenTubes);
             CreateNewTubes();
         }
         

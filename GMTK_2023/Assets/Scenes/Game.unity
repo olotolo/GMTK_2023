@@ -172,6 +172,7 @@ MonoBehaviour:
   CurrentBoost: {fileID: 0}
   Slow: 0
   Fast: 0
+  _speed: 3
   TimeBetweenTubes: 2.5
 --- !u!1 &17969803
 GameObject:
@@ -2937,6 +2938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _forceUp: 250
   HeightToJump: -0.5
+  _jumpHeightDisplay: {fileID: 1749242989}
   _scoreDisplay: {fileID: 603930233}
   _gameOverScoreDisplay: {fileID: 916146607}
   _gameOverDisplay: {fileID: 345495798}

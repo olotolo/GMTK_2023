@@ -32,7 +32,7 @@ public class InvisibleClickObject : MonoBehaviour
         {
             return;
         }
-        int powerUpChance = UnityEngine.Random.Range(1, 5);
+        int powerUpChance = UnityEngine.Random.Range(1, 1);
         if(powerUpChance == 1)
         {
             int rnd = UnityEngine.Random.Range(0, FindFirstObjectByType<TubeController>().PowerUp.Count);

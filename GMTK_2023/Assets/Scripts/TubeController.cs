@@ -10,10 +10,28 @@ public class TubeController : MonoBehaviour
     [SerializeField] public List<GameObject> PowerUp;
     public GameObject CurrentBoost;
 
-    public bool Slow = false;
-    public bool Fast = false;
+    private bool _slow = false;
+    public bool Slow
+    {
+        get => _slow;
+        set
+        {
+            _slow = value;
+            if(_slow) { Fast = false; }
+        }
+    }
+    private bool _fast = false;
+    public bool Fast
+    {
+        get => _fast;
+        set
+        {
+            _fast = value;
+            if(_fast) { Slow = false; }
+        }
+    }
 
-    private float _speed = 3;
+    [SerializeField] private float _speed = 3;
 
     public float Speed
     {

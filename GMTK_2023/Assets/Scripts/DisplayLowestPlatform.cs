@@ -10,13 +10,14 @@ public class DisplayLowestPlatform : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _platform;
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("powerupsss");
         Toggle();
     }
 
     private void Start()
     {
         gameObject.GetComponent<Toggle>().isOn = Played.displayPlatform;
+        Debug.Log(Played.displayPlatform);
+        _platform.SetActive(Played.displayPlatform);
     }
 
     public void Toggle()

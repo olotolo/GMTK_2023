@@ -11,6 +11,7 @@ public class BirdFly : MonoBehaviour
     public float HeightToJump = -0.5f;
     private bool jumped = false;
     private int _score = 0, _difficultyCount = 0;
+    [SerializeField] GameObject _jumpHeightDisplay;
 
     public int Score
     {
@@ -45,6 +46,7 @@ public class BirdFly : MonoBehaviour
 
     private void Start()
     {
+        _jumpHeightDisplay.SetActive(Played.displayPlatform);
         _tubeController = FindAnyObjectByType<TubeController>();
         ChangeJumpDisplay();
     }

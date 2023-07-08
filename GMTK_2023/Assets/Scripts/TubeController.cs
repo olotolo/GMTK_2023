@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class TubeController : MonoBehaviour
@@ -13,16 +10,19 @@ public class TubeController : MonoBehaviour
     public int TimeBetweenTubes = 3000;
     bool active = true;
 
+
     private void Start()
     {
         CreateNewTubes();
     }
 
+
+
     //Instanciate Tubes
     public void CreateNewTubes()
     {
-        GameObject clickObject = Instantiate(_clickObject, transform.position, Quaternion.identity);
-        //clickObject.transform.SetParent(transform, false);
+        GameObject clickObject = Instantiate(_clickObject, new Vector3(0,0,0), Quaternion.identity);
+        clickObject.transform.SetParent(transform, false);
 
 
         if (active)

@@ -1,9 +1,7 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.UI.Image;
 
 public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
 {
@@ -11,15 +9,12 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
     public GameObject TubeBot { get; set; }
     private TubeController TubeController { get; set; }
 
-    private Vector3 _destination;
-
     private Rigidbody2D rb;
-    private int change;
+    private float _y;
 
     private void Awake()
     {
         TubeController = FindAnyObjectByType<TubeController>();
-        Debug.Log(transform.childCount);
         TubeBot = transform.GetChild(0).gameObject;
         TubeTop = transform.GetChild(1).gameObject;
     }
@@ -28,10 +23,9 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
     //Tube Bottom: Y Value Range -10 - 0 (-10 - -3)
     private void Start()
     {
-        int _tubeTopX = Random.Range(3, 10);
+        int _tubeTopX = UnityEngine.Random.Range(3, 10);
         TubeTop.transform.position = new Vector3(TubeTop.transform.position.x, _tubeTopX, 0);
         TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (11 - _tubeTopX), 0);
-
         rb = GetComponent<Rigidbody2D>();
     }
     public void OnPointerClick(PointerEventData eventData)
@@ -39,18 +33,19 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
          //Leftclick Higher, Rightclick Lower
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if(change < 8)
+            if(!TubeBot.GetComponent<MoveTube>().ReachedMax)
             {
-                transform.position += new Vector3(0, 1, 0);
-                change++;
+                _y = transform.position.y;
+                GetComponent<Rigidbody2D>().AddForce(transform.up * 50);
             }
-        }
+            
+        } 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if(change > -8)
+            if(!TubeTop.GetComponent<MoveTube>().ReachedMax)
             {
-                transform.position += new Vector3(0, -1, 0);
-                change--;
+                _y = transform.position.y;
+                GetComponent<Rigidbody2D>().AddForce(transform.up * -50);
             }
         }
     }
@@ -65,17 +60,6 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
         }
         transform.position = new Vector3(transform.position.x, target.y, transform.position.z);
     }
-    /*
-    IEnumerator moveTube(float y)
-    {
-        for(int i = 0; i < 5; i++)
-        {
-            float speed = 20f;
-            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0,y,0), Time.deltaTime * speed);
-            yield return new WaitForEndOfFrame();
-        }
-    }
-    */
 
 
     private void Update()
@@ -85,8 +69,17 @@ public class InvisibleClickObject : MonoBehaviour, IPointerClickHandler
         {
             Destroy(gameObject);
         }
+        
         //Moves the tube
-        transform.position += Vector3.left * Time.deltaTime * TubeController.Speed;
-        rb.MovePosition(transform.position + _destination * Time.deltaTime * 10f);
+        transform.position += Vector3.left* Time.deltaTime * TubeController.Speed;
+        if (transform.position.y >= _y + 1 || transform.position.y <= _y - 1)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0;
+            transform.position = new Vector3(transform.position.x, Convert.ToInt32(transform.position.y), transform.position.z);
+            Debug.Log(_y - transform.position.y);
+            return;
+        }
     }
+
 }

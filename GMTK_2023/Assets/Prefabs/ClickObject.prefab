@@ -240,7 +240,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8488070480311359253}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -274,6 +274,10 @@ PrefabInstance:
     - target: {fileID: 1148163692527896912, guid: 7b07927e05de4fb488a3aa7ff2a9fc91, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233875108760603902, guid: 7b07927e05de4fb488a3aa7ff2a9fc91, type: 3}
+      propertyPath: EndName
+      value: TopMax
       objectReference: {fileID: 0}
     - target: {fileID: 7115937603119548386, guid: 7b07927e05de4fb488a3aa7ff2a9fc91, type: 3}
       propertyPath: m_Name
@@ -352,6 +356,10 @@ PrefabInstance:
     - target: {fileID: 1148163692527896912, guid: 7b07927e05de4fb488a3aa7ff2a9fc91, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233875108760603902, guid: 7b07927e05de4fb488a3aa7ff2a9fc91, type: 3}
+      propertyPath: EndName
+      value: BotMax
       objectReference: {fileID: 0}
     - target: {fileID: 7115937603119548386, guid: 7b07927e05de4fb488a3aa7ff2a9fc91, type: 3}
       propertyPath: m_Name

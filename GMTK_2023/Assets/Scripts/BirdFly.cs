@@ -98,6 +98,7 @@ public class BirdFly : MonoBehaviour
     }
 
 
+
     private IEnumerator GameOver()
     {
         _gameOver = true;

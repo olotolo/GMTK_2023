@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class DisplayLowestPlatform : MonoBehaviour
+public class DisplayLowestPlatform : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private GameObject _platform;
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("powerupsss");
         Toggle();
     }
 
-    
+    private void Start()
+    {
+        gameObject.GetComponent<Toggle>().isOn = Played.displayPlatform;
+    }
 
     public void Toggle()
     {
-        Debug.Log("Toggle");
         if(Played.displayPlatform == false)
         {
             Played.displayPlatform = true;

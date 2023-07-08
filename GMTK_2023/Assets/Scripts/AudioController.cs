@@ -43,6 +43,18 @@ public class AudioController : MonoBehaviour
         s.source.Play();
     }
 
+    public void MuteSound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.volume = 0f;
+        
+    }
+    public void EnableSound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.volume = s.volume;
+    }
+
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

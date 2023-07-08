@@ -23,9 +23,9 @@ public class InvisibleClickObject : MonoBehaviour
     //Tube Bottom: Y Value Range 0 - -10
     private void Start()
     {
-        int _tubeTopX = UnityEngine.Random.Range(1, 10);
-        TubeTop.transform.position = new Vector3(TubeTop.transform.position.x, _tubeTopX, 0);
-        TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (11 - _tubeTopX), 0);
+        int _tubeTopY = UnityEngine.Random.Range(9, 15);
+        TubeTop.transform.position = new Vector3(TubeTop.transform.position.x, _tubeTopY, 0);
+        TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (20 - _tubeTopY), 0);
         rb = GetComponent<Rigidbody2D>();
     }
 

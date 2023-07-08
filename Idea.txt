@@ -31,4 +31,5 @@ When generating Tubes first Instanciate the first one with random numbers and in
 
 ToDo: Smooth the tube positioning
 
+Music and Audio Mute buttons
 Make an event where the tubes move up and down without the player doing anything. (Maybe increase the tube gap during that event)

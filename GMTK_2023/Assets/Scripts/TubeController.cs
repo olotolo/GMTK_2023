@@ -10,29 +10,30 @@ public class TubeController : MonoBehaviour
     public float TimeBetweenTubes = 3f;
     bool active = true;
     private int _tubesCreated;
-    private bool _tubeTimeIncresed;
 
     private void Start()
     {
         CreateNewTubes();
+        active = true;
     }
+
+    
 
     //Instanciate Tubes
     public void CreateNewTubes()
     {
         GameObject clickObject = Instantiate(_clickObject, new Vector3(0,0,0), Quaternion.identity);
         clickObject.transform.SetParent(transform, false);
-
-        if (active)
-        {
-            if(_tubesCreated / 3 == 0 && _tubesCreated != 0)
-            {
-                TimeBetweenTubes += 3f;
-                _tubeTimeIncresed = true;
-            }
-            StartCoroutine(NextTubeSpawn());
-        }
         _tubesCreated++;
+        //When the birds height changes the tube spawns with a delay
+        //Gives the Player more time to adjust to the change
+        if (_tubesCreated % 3 == 0)
+        {
+            Debug.Log("t+1 / 3");
+            StartCoroutine(NextTubeSpawn(TimeBetweenTubes + 1f));
+            return;
+        }
+        StartCoroutine(NextTubeSpawn(TimeBetweenTubes));
 
     }
 
@@ -41,17 +42,11 @@ public class TubeController : MonoBehaviour
         active = false;
     }
 
-    private IEnumerator NextTubeSpawn()
+    private IEnumerator NextTubeSpawn(float time)
     {
         if(active)
         {
-            yield return new WaitForSeconds(TimeBetweenTubes);
-            if(_tubeTimeIncresed)
-            {
-                Debug.Log("Tubetime decreased");
-                TimeBetweenTubes -= 3f;
-                _tubeTimeIncresed = false;
-            }
+            yield return new WaitForSeconds(time);
             Debug.Log("new tube created");
 
             CreateNewTubes();

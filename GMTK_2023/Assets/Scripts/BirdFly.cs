@@ -12,6 +12,7 @@ public class BirdFly : MonoBehaviour
     private bool jumped = false;
     private int _score = 0, _difficultyCount = 0;
     [SerializeField] GameObject _jumpHeightDisplay;
+    [SerializeField] TextMeshProUGUI _highscore;
 
     public int Score
     {
@@ -104,6 +105,11 @@ public class BirdFly : MonoBehaviour
     private IEnumerator GameOver()
     {
         _gameOver = true;
+        if(_score > Played.Highscore)
+        {
+            Played.Highscore = _score;
+        }
+        _highscore.text = "Highscore: " + Played.Highscore.ToString();
         yield return new WaitForSeconds(1);
         _gameOverDisplay.SetActive(true);
         Debug.Log("Game Over!");

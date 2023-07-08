@@ -83,12 +83,14 @@ public class TubeController : MonoBehaviour
         _tubesCreated++;
         //When the birds height changes the tube spawns with a delay
         //Gives the Player more time to adjust to the change
+        float additionalTime = 0;
+        if (Slow) additionalTime += 1;
         if (_tubesCreated % 3 == 0)
         {
-            StartCoroutine(NextTubeSpawn(TimeBetweenTubes + 0));
-            return;
+                additionalTime += 1;
         }
-        StartCoroutine(NextTubeSpawn(TimeBetweenTubes));
+        
+        StartCoroutine(NextTubeSpawn(TimeBetweenTubes + additionalTime));
 
     }
 

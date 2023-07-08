@@ -11,6 +11,8 @@ public class InvisibleClickObject : MonoBehaviour
     private Rigidbody2D rb;
     private float _y;
     private bool _isMoving = false;
+    private bool _event = false;
+    private bool _direction = false;
 
     private void Awake()
     {
@@ -28,11 +30,22 @@ public class InvisibleClickObject : MonoBehaviour
         TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (20 - _tubeTopY), 0);
         rb = GetComponent<Rigidbody2D>();
 
+        if(Played.Events)
+        {
+            int eventChance = UnityEngine.Random.Range(1, 1);
+            if (eventChance == 1)
+            {
+                _event = true;
+                StartCoroutine(MoveUp());
+            }
+        }
+        
+
         if(!Played.powerUps)
         {
             return;
         }
-        int powerUpChance = UnityEngine.Random.Range(1, 1);
+        int powerUpChance = UnityEngine.Random.Range(1, 5);
         if(powerUpChance == 1)
         {
             int rnd = UnityEngine.Random.Range(0, FindFirstObjectByType<TubeController>().PowerUp.Count);
@@ -41,6 +54,36 @@ public class InvisibleClickObject : MonoBehaviour
             _powerUp.transform.SetParent(gameObject.transform);
         }
     }
+
+    private IEnumerator MoveUp()
+    {
+        yield return new WaitForSeconds(1);
+        if (!_isMoving)
+        {
+            if (!TubeTop.GetComponent<MoveTube>().ReachedMax)
+            {
+                if (!FindFirstObjectByType<BirdFly>()._gameOver)
+                {
+                    _y = transform.position.y;
+                    if(!_direction)
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(transform.up * -50);
+                        _direction = true;
+                    } else
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(transform.up * 50);
+                        _direction = false;
+                    }
+                    _isMoving = true;
+                    FindFirstObjectByType<AudioController>().Play("Tube_1");
+                }
+            }
+        }
+        StartCoroutine(MoveUp());
+    }
+
+    
+
 
     private void Update()
     {
@@ -99,6 +142,8 @@ public class InvisibleClickObject : MonoBehaviour
 
         
     }
+
+
 
 
 }

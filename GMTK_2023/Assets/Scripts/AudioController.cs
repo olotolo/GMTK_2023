@@ -55,7 +55,10 @@ public class AudioController : MonoBehaviour
         s.source.Stop();
     }
 
-
+    private void Start()
+    {
+        Play("MainMenu");
+    }
 
 
 }

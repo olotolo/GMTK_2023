@@ -111,6 +111,8 @@ public class BirdFly : MonoBehaviour
         }
 
         ChangeBirdPosition(UnityEngine.Random.Range(HeightToJump - 1.5f, HeightToJump + 1.5f));
+        if(HeightToJump > 3) { HeightToJump = 3; }
+        else if(HeightToJump < -3) { HeightToJump = -3; }
         ChangeJumpDisplay();
     }
 

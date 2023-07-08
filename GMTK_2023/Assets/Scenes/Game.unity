@@ -2692,6 +2692,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: e52e4b7bf89b9364ca674c482eafe4e6, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!1 &1967116814
 GameObject:
   m_ObjectHideFlags: 0

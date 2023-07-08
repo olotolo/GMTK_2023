@@ -27,7 +27,12 @@ public class InvisibleClickObject : MonoBehaviour
         TubeTop.transform.position = new Vector3(TubeTop.transform.position.x, _tubeTopY, 0);
         TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (20 - _tubeTopY), 0);
         rb = GetComponent<Rigidbody2D>();
-        int powerUpChance = UnityEngine.Random.Range(1, 4);
+
+        if(!Played.powerUps)
+        {
+            return;
+        }
+        int powerUpChance = UnityEngine.Random.Range(1, 5);
         if(powerUpChance == 1)
         {
             int rnd = UnityEngine.Random.Range(0, FindFirstObjectByType<TubeController>().PowerUp.Count);

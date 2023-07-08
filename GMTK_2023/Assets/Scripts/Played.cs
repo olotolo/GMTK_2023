@@ -5,4 +5,6 @@ public static class Played
 
     public static bool muteMusic = false;
     public static bool muteSound = false;
+
+    public static bool powerUps = true;
 }

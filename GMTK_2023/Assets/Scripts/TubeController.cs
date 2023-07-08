@@ -8,6 +8,7 @@ public class TubeController : MonoBehaviour
     [SerializeField] GameObject _tube;
     [SerializeField] GameObject _clickObject;
     [SerializeField] public List<GameObject> PowerUp;
+    public GameObject CurrentBoost;
 
     public bool Slow = false;
     public bool Fast = false;
@@ -24,7 +25,7 @@ public class TubeController : MonoBehaviour
             }
             if(Fast == true)
             {
-                return _speed / 1.5f;
+                return _speed * 1.5f;
             }
             return _speed;
         }
@@ -37,7 +38,7 @@ public class TubeController : MonoBehaviour
             }
             if(Fast == true)
             {
-                _speed = value * 1.5f;
+                _speed = value / 1.5f;
                 return;
             }
             _speed = value;
@@ -66,8 +67,7 @@ public class TubeController : MonoBehaviour
         //Gives the Player more time to adjust to the change
         if (_tubesCreated % 3 == 0)
         {
-            Debug.Log("t+1 / 3");
-            StartCoroutine(NextTubeSpawn(TimeBetweenTubes + 1f));
+            StartCoroutine(NextTubeSpawn(TimeBetweenTubes + 0));
             return;
         }
         StartCoroutine(NextTubeSpawn(TimeBetweenTubes));

@@ -121,9 +121,9 @@ public class BirdFly : MonoBehaviour
             _tubeController.TimeBetweenTubes -= 0.1f;
         }
 
-        ChangeBirdPosition(UnityEngine.Random.Range(HeightToJump - 1.5f, HeightToJump + 1.5f));
-        if(HeightToJump > 3) { HeightToJump = 2.5f; }
-        else if(HeightToJump < -3) { HeightToJump = -2.5f; }
+        ChangeBirdPosition(UnityEngine.Random.Range(HeightToJump - 1.0f, HeightToJump + 1.0f));
+        if(HeightToJump > 2.5f) { HeightToJump = 2.5f; }
+        else if(HeightToJump < -2.5f) { HeightToJump = -2.5f; }
         ChangeJumpDisplay();
     }
 

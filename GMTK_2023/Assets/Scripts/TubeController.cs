@@ -10,6 +10,7 @@ public class TubeController : MonoBehaviour
     [SerializeField] GameObject _clickObject;
     [SerializeField] public List<GameObject> PowerUp;
     public GameObject CurrentBoost;
+    [SerializeField] SpriteRenderer _birdSprite;
 
     [SerializeField]
     private bool _slow = false;
@@ -19,7 +20,12 @@ public class TubeController : MonoBehaviour
         set
         {
             _slow = value;
-            if(_slow) { Fast = false; StartCoroutine(StopPowerUpSlow()); }
+            if(_slow) 
+            { 
+                Fast = false; 
+                StartCoroutine(StopPowerUpSlow());
+                _birdSprite.GetComponent<SpriteRenderer>().color = Color.red;
+            }
         }
     }
 
@@ -31,7 +37,12 @@ public class TubeController : MonoBehaviour
         set
         {
             _fast = value;
-            if(_fast) { Slow = false; StartCoroutine(StopPowerUpFast());  }
+            if(_fast) 
+            {
+                Slow = false;
+                StartCoroutine(StopPowerUpFast());
+                _birdSprite.GetComponent<SpriteRenderer>().color = Color.green;
+            }
         }
     }
 
@@ -82,12 +93,14 @@ public class TubeController : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         Fast = false;
+        _birdSprite.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public IEnumerator StopPowerUpSlow()
     {
         yield return new WaitForSeconds(3);
         Slow = false;
+        _birdSprite.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
 

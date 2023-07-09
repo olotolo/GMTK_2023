@@ -283,6 +283,7 @@ MonoBehaviour:
   - {fileID: 5717376313140705818, guid: 04bf1df096730c942a7183c4126f74b0, type: 3}
   - {fileID: 7229669177107074784, guid: 1fb19178a1d344b4b9789a8eeddb854d, type: 3}
   CurrentBoost: {fileID: 0}
+  _birdSprite: {fileID: 1228315396}
   _slow: 0
   _fast: 0
   _speed: 3

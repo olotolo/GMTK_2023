@@ -28,7 +28,6 @@ public class SpeedIncreasePowerup : MonoBehaviour, IStopPowerUp
             }
             tb.CurrentBoost = gameObject;
             tb.Fast = true;
-            StartCoroutine(StopPowerUp());
 
             GetComponent<SpriteRenderer>().enabled = false;
         }

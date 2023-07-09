@@ -19,9 +19,10 @@ public class TubeController : MonoBehaviour
         set
         {
             _slow = value;
-            if(_slow) { Fast = false; }
+            if(_slow) { Fast = false; StartCoroutine(StopPowerUpSlow()); }
         }
     }
+
     [SerializeField]
     private bool _fast = false;
     public bool Fast
@@ -30,7 +31,7 @@ public class TubeController : MonoBehaviour
         set
         {
             _fast = value;
-            if(_fast) { Slow = false; }
+            if(_fast) { Slow = false; StartCoroutine(StopPowerUpFast());  }
         }
     }
 
@@ -76,7 +77,19 @@ public class TubeController : MonoBehaviour
         active = true;
     }
 
-    
+
+    public IEnumerator StopPowerUpFast()
+    {
+        yield return new WaitForSeconds(3);
+        Fast = false;
+    }
+
+    public IEnumerator StopPowerUpSlow()
+    {
+        yield return new WaitForSeconds(3);
+        Slow = false;
+    }
+
 
     //Instanciate Tubes
     public void CreateNewTubes()

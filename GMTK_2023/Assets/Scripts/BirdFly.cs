@@ -47,11 +47,7 @@ public class BirdFly : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerPrefs.GetInt("firstTimePlaying") == 0)
-        {
-            PlayerPrefs.SetInt("firstTimePlaying", 1);
-            PlayerPrefs.SetInt("powerUps", 1);
-        }
+        
         NumToBool ntb = new NumToBool();
         _jumpHeightDisplay.SetActive(ntb.NumberToBool(PlayerPrefs.GetInt("displayPlatform")));
         _tubeController = FindAnyObjectByType<TubeController>();

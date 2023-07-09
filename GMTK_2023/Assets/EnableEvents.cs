@@ -13,6 +13,11 @@ public class EnableEvents : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("firstTimePlaying") == 0)
+        {
+            PlayerPrefs.SetInt("firstTimePlaying", 1);
+            PlayerPrefs.SetInt("powerUps", 1);
+        }
         NumToBool ntb = new NumToBool();
         gameObject.GetComponent<Toggle>().isOn = ntb.NumberToBool(PlayerPrefs.GetInt("events"));
     }

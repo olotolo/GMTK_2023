@@ -8,21 +8,26 @@ public class ToggleSound : MonoBehaviour, IPointerDownHandler
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("clicked");
-        if (Played.muteSound == false)
+        NumToBool ntb = new NumToBool();
+        if (ntb.NumberToBool(PlayerPrefs.GetInt("muteSound")) == false)
         {
-            Played.muteSound = true;
+            PlayerPrefs.SetInt("muteSound", 1);
             FindAnyObjectByType<AudioController>().MuteSound("Tube_1");
         }
         else
         {
-            Played.muteSound = false;
+            PlayerPrefs.SetInt("muteSound", 0);
             FindAnyObjectByType<AudioController>().EnableSound("Tube_1");
         }
     }
 
     private void Start()
     {
-        GetComponent<Toggle>().isOn = Played.muteSound;
+        NumToBool ntb = new NumToBool();
+        GetComponent<Toggle>().isOn = ntb.NumberToBool(PlayerPrefs.GetInt("muteSound"));
+        if(ntb.NumberToBool(PlayerPrefs.GetInt("muteSound")) == true)
+        {
+            FindAnyObjectByType<AudioController>().MuteSound("Tube_1");
+        }
     }
 }

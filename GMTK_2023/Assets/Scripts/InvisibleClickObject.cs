@@ -30,7 +30,7 @@ public class InvisibleClickObject : MonoBehaviour
         TubeBot.transform.position = new Vector3(TubeBot.transform.position.x, -3 - (20 - _tubeTopY), 0);
         rb = GetComponent<Rigidbody2D>();
 
-        if(Played.Events)
+        if(PlayerPrefs.GetInt("events") == 1)
         {
             int eventChance = UnityEngine.Random.Range(1, 2);
             if (eventChance == 1)
@@ -41,7 +41,7 @@ public class InvisibleClickObject : MonoBehaviour
         }
         
 
-        if(!Played.powerUps)
+        if(PlayerPrefs.GetInt("powerUps") == 0)
         {
             return;
         }

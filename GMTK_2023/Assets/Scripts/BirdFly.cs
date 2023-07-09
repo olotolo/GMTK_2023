@@ -43,9 +43,17 @@ public class BirdFly : MonoBehaviour
     [SerializeField] GameObject _gameOverDisplay;
     [SerializeField] GameObject _jumpDisplay;
 
+    
+
     private void Start()
     {
-        _jumpHeightDisplay.SetActive(Played.displayPlatform);
+        if(PlayerPrefs.GetInt("firstTimePlaying") == 0)
+        {
+            PlayerPrefs.SetInt("firstTimePlaying", 1);
+            PlayerPrefs.SetInt("powerUps", 1);
+        }
+        NumToBool ntb = new NumToBool();
+        _jumpHeightDisplay.SetActive(ntb.NumberToBool(PlayerPrefs.GetInt("displayPlatform")));
         _tubeController = FindAnyObjectByType<TubeController>();
         ChangeJumpDisplay();
     }
@@ -103,11 +111,11 @@ public class BirdFly : MonoBehaviour
     private IEnumerator GameOver()
     {
         _gameOver = true;
-        if(_score > Played.Highscore)
+        if(_score > PlayerPrefs.GetInt("highscore"))
         {
-            Played.Highscore = _score;
+            PlayerPrefs.SetInt("highscore", _score);
         }
-        _highscore.text = "Highscore: " + Played.Highscore.ToString();
+        _highscore.text = "Highscore: " + PlayerPrefs.GetInt("highscore").ToString();
         yield return new WaitForSeconds(1);
         _gameOverDisplay.SetActive(true);
         Debug.Log("Game Over!");

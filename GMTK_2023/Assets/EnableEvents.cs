@@ -13,19 +13,21 @@ public class EnableEvents : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        gameObject.GetComponent<Toggle>().isOn = Played.Events;
+        NumToBool ntb = new NumToBool();
+        gameObject.GetComponent<Toggle>().isOn = ntb.NumberToBool(PlayerPrefs.GetInt("events"));
     }
 
     public void Toggle()
     {
-        if (Played.Events == false)
+        NumToBool ntb = new NumToBool();
+        if (ntb.NumberToBool(PlayerPrefs.GetInt("events")) == false)
         {
-            Played.Events = true;
+            PlayerPrefs.SetInt("events", 1);
 
         }
         else
         {
-            Played.Events = false;
+            PlayerPrefs.SetInt("events", 0);
         }
     }
 }

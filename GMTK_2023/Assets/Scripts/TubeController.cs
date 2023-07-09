@@ -16,6 +16,7 @@ public class TubeController : MonoBehaviour
     private bool _slow = false;
     public bool Slow
     {
+        
         get => _slow;
         set
         {
@@ -86,17 +87,18 @@ public class TubeController : MonoBehaviour
     {
         CreateNewTubes();
         active = true;
+        
     }
 
 
-    public IEnumerator StopPowerUpFast()
+    private IEnumerator StopPowerUpFast()
     {
         yield return new WaitForSeconds(3);
         Fast = false;
         _birdSprite.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public IEnumerator StopPowerUpSlow()
+    private IEnumerator StopPowerUpSlow()
     {
         yield return new WaitForSeconds(3);
         Slow = false;

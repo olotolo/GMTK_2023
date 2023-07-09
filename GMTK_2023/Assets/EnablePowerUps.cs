@@ -11,21 +11,25 @@ public class EnablePowerUps : MonoBehaviour, IPointerClickHandler
         Toggle();
     }
 
+
+
     private void Start()
     {
-        gameObject.GetComponent<Toggle>().isOn = Played.powerUps;
+        NumToBool ntb = new NumToBool();
+        gameObject.GetComponent<Toggle>().isOn = ntb.NumberToBool(PlayerPrefs.GetInt("powerUps"));
     }
 
     public void Toggle()
     {
-        Debug.Log("Toggle");
-        if(Played.powerUps == false)
+        NumToBool ntb = new NumToBool();
+        if(ntb.NumberToBool(PlayerPrefs.GetInt("powerUps")) == false)
         {
-            Played.powerUps = true;
+            PlayerPrefs.SetInt("powerUps", 1);
 
         } else
         {
-            Played.powerUps = false;
+            PlayerPrefs.SetInt("powerUps", 0);
+
         }
     }
 }

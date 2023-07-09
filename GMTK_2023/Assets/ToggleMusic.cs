@@ -8,19 +8,25 @@ public class ToggleMusic : MonoBehaviour, IPointerDownHandler
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("clicked");
-        if(Played.muteMusic == false)
+        NumToBool ntb = new NumToBool();
+        if(ntb.NumberToBool(PlayerPrefs.GetInt("muteMusic")) == false)
         {
-            Played.muteMusic = true;
+            PlayerPrefs.SetInt("muteMusic", 1);
             FindAnyObjectByType<AudioController>().MuteSound("MainMenu");
         } else
         {
-            Played.muteMusic = false;
+            PlayerPrefs.SetInt("muteMusic", 0);
             FindAnyObjectByType<AudioController>().EnableSound("MainMenu");
         }
     }
     private void Start()
     {
-        GetComponent<Toggle>().isOn = Played.muteMusic;
+        NumToBool ntb = new NumToBool();
+        GetComponent<Toggle>().isOn = ntb.NumberToBool(PlayerPrefs.GetInt("muteMusic"));
+        if(ntb.NumberToBool(PlayerPrefs.GetInt("muteMusic")) == true)
+        {
+            AudioController audioController = FindFirstObjectByType<AudioController>();
+            audioController.MuteSound("MainMenu");
+        }
     }
 }

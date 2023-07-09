@@ -15,22 +15,25 @@ public class DisplayLowestPlatform : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        gameObject.GetComponent<Toggle>().isOn = Played.displayPlatform;
-        Debug.Log(Played.displayPlatform);
-        _platform.SetActive(Played.displayPlatform);
+        NumToBool ntb = new NumToBool();
+        gameObject.GetComponent<Toggle>().isOn = ntb.NumberToBool(PlayerPrefs.GetInt("displayPlatform"));
+        _platform.SetActive(ntb.NumberToBool(PlayerPrefs.GetInt("displayPlatform")));
     }
 
     public void Toggle()
     {
-        if(Played.displayPlatform == false)
+        NumToBool ntb = new NumToBool();
+
+        if (ntb.NumberToBool(PlayerPrefs.GetInt("displayPlatform")) == false)
         {
-            Played.displayPlatform = true;
+            PlayerPrefs.SetInt("displayPlatform", 1);
 
         } else
         {
-            Played.displayPlatform = false;
+            PlayerPrefs.SetInt("displayPlatform", 0);
+
         }
-        _platform.SetActive(Played.displayPlatform);
+        _platform.SetActive(ntb.NumberToBool(PlayerPrefs.GetInt("displayPlatform")));
     }
 
 }

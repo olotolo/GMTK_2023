@@ -120,7 +120,7 @@ public class BirdFly : MonoBehaviour
     public void IncreaseSpeed()
     {
         _tubeController.Speed += 0.1f;
-        if(_tubeController.TimeBetweenTubes > 1.501)
+        if(_tubeController.TimeBetweenTubes > 1.001)
         {
             _tubeController.TimeBetweenTubes -= 0.1f;
         }

@@ -15,19 +15,23 @@ public class StartGame : MonoBehaviour, IPointerClickHandler
         Time.timeScale = 1f;
         _platform.SetActive(_displayPlatformToggle.GetComponent<Toggle>().isOn);
         FindFirstObjectByType<BirdFly>()._gameOver = false;
+        FindAnyObjectByType<TubeController>().CreateNewTubes();
     }
 
     void Start()
     {
-        if(Played.played == false)
+        if (Played.played == false)
         {
             Time.timeScale = 0f;
             Played.played = true;
-        } else
+        }
+        else
         {
             Destroy(_startMenu);
             Time.timeScale = 1f;
             FindFirstObjectByType<BirdFly>()._gameOver = false;
+            FindAnyObjectByType<TubeController>().CreateNewTubes();
+
 
         }
 

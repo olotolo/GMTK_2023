@@ -7,6 +7,7 @@ public class RestartGame : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        FindAnyObjectByType<TubeController>().CreateNewTubes();
     }
 
 }
